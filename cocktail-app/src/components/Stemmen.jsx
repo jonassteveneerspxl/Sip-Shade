@@ -1,30 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, update, get } from 'firebase/database';
 import { dbInstance } from '../App';
-
-// Mapping van groepskleuren naar Tailwind classes
-const COLOR_MAP = {
-  Rood: 'bg-red-500',
-  Blauw: 'bg-blue-500',
-  Geel: 'bg-yellow-400',
-  Groen: 'bg-green-500',
-  Oranje: 'bg-orange-400',
-  Roze: 'bg-pink-400',
-  Paars: 'bg-purple-500',
-  Turquoise: 'bg-cyan-400',
-  Zwart: 'bg-gray-900',
-  Wit: 'bg-gray-100 border border-gray-300',
-  Grijs: 'bg-gray-400',
-  Bruin: 'bg-yellow-900',
-  Lichtblauw: 'bg-sky-300',
-  Lichtgroen: 'bg-lime-300',
-  Zalm: 'bg-orange-300',
-  Goud: 'bg-yellow-300',
-  Zilver: 'bg-gray-300',
-  Beige: 'bg-yellow-100',
-};
-
-const getColorClass = kleur => COLOR_MAP[kleur] || 'bg-gray-500';
+import getColorHex from '../helpers/getColorHex';
 
 const categorieen = [
   { key: 'lekkersteCocktail', label: 'Lekkerste cocktail' },
@@ -150,7 +127,7 @@ export default function Stemmen({ guests, user, groepen }) {
                       />
                       {groep && (
                         <span
-                          className={`ml-2 w-5 h-5 rounded-full inline-block border-2 border-white shadow ${getColorClass(
+                          className={`ml-2 w-5 h-5 rounded-full inline-block border-2 border-white shadow ${getColorHex(
                             groep.kleur
                           )}`}
                         />
@@ -223,7 +200,7 @@ function KleurDropDown({ value, onChange, opties, groepen, disabledOpties }) {
                   {({ selected }) => (
                     <>
                       <span
-                        className={`absolute left-2 top-2 w-4 h-4 rounded-full border border-white shadow ${getColorClass(
+                        className={`absolute left-2 top-2 w-4 h-4 rounded-full border border-white shadow ${getColorHex(
                           kleur
                         )}`}
                       ></span>
