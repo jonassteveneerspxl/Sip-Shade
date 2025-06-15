@@ -1,30 +1,5 @@
 import React from 'react';
-
-// Kleuren mapping hetzelfde als in jouw code
-const COLOR_MAP = {
-  Rood: 'bg-red-500',
-  Blauw: 'bg-blue-500',
-  Geel: 'bg-yellow-400',
-  Groen: 'bg-green-500',
-  Oranje: 'bg-orange-400',
-  Roze: 'bg-pink-400',
-  Paars: 'bg-purple-500',
-  Turquoise: 'bg-cyan-400',
-  Zwart: 'bg-gray-900',
-  Wit: 'bg-gray-100 border border-gray-300',
-  Grijs: 'bg-gray-400',
-  Bruin: 'bg-yellow-900',
-  Lichtblauw: 'bg-sky-300',
-  Lichtgroen: 'bg-lime-300',
-  Zalm: 'bg-orange-300',
-  Goud: 'bg-yellow-300',
-  Zilver: 'bg-gray-300',
-  Beige: 'bg-yellow-100',
-};
-
-function getColorClass(kleur) {
-  return COLOR_MAP[kleur] || 'bg-gray-500';
-}
+import getColorHex from '../helpers/getColorHex';
 
 function getTrophyIcon(position) {
   const trophies = [
@@ -102,7 +77,7 @@ export default function Leaderboard({ guests, user, groepen }) {
                 >
                   <div className="flex items-center gap-4 flex-1">
                     <span
-                      className={`inline-block w-6 h-6 rounded-full border-2 border-white/30 shadow-md ${getColorClass(kleur)}`}
+                      className={`inline-block w-6 h-6 rounded-full border-2 border-white/30 shadow-md ${getColorHex(kleur)}`}
                       title={kleur || 'Onbekende kleur'}
                     />
                     <span className="font-semibold text-cyan-100">{groepNaam}</span>

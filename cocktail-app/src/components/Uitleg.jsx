@@ -106,7 +106,7 @@ export default function Uitleg() {
         </div>
 
         <p className="mt-8 text-xl text-cyan-200 font-semibold flex items-center gap-2 drop-shadow-[0_0_8px_#00CED1] animate-pulse">
-          Laat het feestje beginnen! <span className="text-3xl">🎊🍸</span>
+          Laat het feestje beginnen!
         </p>
       </div>
     </section>
