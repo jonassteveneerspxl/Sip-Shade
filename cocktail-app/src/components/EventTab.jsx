@@ -52,31 +52,9 @@ const EventTab = () => {
   const [globalMessage, setGlobalMessage] = useState("");
   const { isAdmin } = useAuth();
 
-  // Luister naar globale admin-melding
-  useEffect(() => {
-    const db = getDatabase();
-    const msgRef = ref(db, 'globalMessage');
-    const unsub = onValue(msgRef, (snap) => {
-      const val = snap.val();
-      if (val && val.text && val.timestamp) {
-        // Toon popup als nieuw
-        if (!window.__lastGlobalMsg || window.__lastGlobalMsg !== val.timestamp) {
-          showMobilePopup(val.text);
-          window.__lastGlobalMsg = val.timestamp;
-        }
-        setGlobalMessage(val.text);
-      } else {
-        setGlobalMessage("");
-      }
-    });
-    return () => unsub();
-  }, []);
 
-  // Request notification permission and set up event timer
+  // Set up event timer
   useEffect(() => {
-    if ("Notification" in window && Notification.permission !== "granted") {
-      Notification.requestPermission();
-    }
     const timer = setInterval(() => {
       const now = new Date();
       const upcoming = events.find(e => e.time > now);
@@ -97,8 +75,6 @@ const EventTab = () => {
           // Mobiel: custom popup, anders Notification API
           if (window.matchMedia('(max-width: 600px)').matches) {
             showMobilePopup(`Let op! ${nextEvent.name} begint bijna! (${timeLeft})`);
-          } else if (window.Notification && Notification.permission === 'granted') {
-            new Notification(`Let op! ${nextEvent.name} begint bijna!`, { body: `Start over ${timeLeft}` });
           } else {
             alert(`Let op! ${nextEvent.name} begint bijna! (${timeLeft})`);
           }
@@ -108,28 +84,6 @@ const EventTab = () => {
     }
   }, [nextEvent, timeLeft]);
 
-  // Reminder button handler
-  const handleReminder = () => {
-    if (!nextEvent) return alert('Geen aankomende events.');
-    if (Notification && Notification.permission === 'granted') {
-      new Notification('Reminder', {
-        body: `${nextEvent.name} begint om ${nextEvent.time.toLocaleTimeString()}`,
-      });
-    } else {
-      alert(`Reminder: ${nextEvent.name} begint om ${nextEvent.time.toLocaleTimeString()}`);
-    }
-  };
-
-  // Admin: stuur melding naar iedereen
-  const sendAdminMessage = async () => {
-    if (!adminMessage.trim()) return;
-    const db = getDatabase();
-    await set(ref(db, 'globalMessage'), {
-      text: adminMessage,
-      timestamp: Date.now(),
-    });
-    setAdminMessage("");
-  };
 
   // Voeg een eenvoudige mobiele popup toe
   function showMobilePopup(message) {
@@ -179,24 +133,6 @@ const EventTab = () => {
           </>
         ) : (
           <p className="text-pink-300">Alle events zijn voorbij!</p>
-        )}
-        {isAdmin && (
-          <div className="mt-4">
-            <h4 className="text-lg font-semibold text-purple-200 mb-2">Stuur een melding naar alle gebruikers</h4>
-            <textarea
-              value={adminMessage}
-              onChange={e => setAdminMessage(e.target.value)}
-              placeholder="Typ je melding hier..."
-              className="w-full p-2 rounded-md border border-pink-400 bg-black/40 text-cyan-100 mb-2"
-              rows="3"
-            />
-            <button
-              onClick={sendAdminMessage}
-              className="w-full px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg shadow-md transition"
-            >
-              Stuur melding
-            </button>
-          </div>
         )}
       </div>
     </div>

@@ -9,6 +9,7 @@ import Stemmen from './components/Stemmen';
 import SipAndShadeLogo from './assets/SipAndShadeLogo';
 import Login from './components/Login';
 import EventTab from './components/EventTab';
+import AdminPanel from './components/AdminPanel';
 import { useAuth } from './context/AuthContext'; // <-- import useAuth
 import './index.css';
 
@@ -37,7 +38,7 @@ export default function App() {
   const [page, setPage] = useState(0);
   const [guests, setGuests] = useState({});
   const [groeps, setGroeps] = useState([]);
-  const { user } = useAuth(); // <-- get user
+  const { user, isAdmin } = useAuth(); // <-- get isAdmin
 
   useEffect(() => {
     const guestsRef = ref(db, 'guests');
@@ -57,7 +58,7 @@ export default function App() {
         <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-400 mb-2 tracking-tight drop-shadow-[0_0_16px_#7C3AED] text-center">
           Cocktail Party
         </h1>
-        <Menu page={page} setPage={setPage} />
+        <Menu page={page} setPage={setPage} user={{...user, admin: isAdmin}} />
       </header>
 
       <main className="flex-1 flex mt-4 justify-center items-start">
@@ -71,7 +72,7 @@ export default function App() {
             {page === 3 && <Stemmen guests={guests} user={user} groepen={groeps} />}
             {page === 4 && <EventTab/>}
             {page === 5 && <Login/>}
-            
+            {isAdmin && page === 6 && <AdminPanel groepen={groeps} user={user} />}
           </div>
         </section>
       </main>

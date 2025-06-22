@@ -45,9 +45,12 @@ export default function Leaderboard({ guests, user, groepen }) {
     });
   });
 
-  // Voeg ook groepen zonder score toe met 0 punten
+  // Voeg ook groepen zonder score toe met 0 punten, tel adminPoints op
   const allGroupsWithScores = useMemo(() =>
-    Object.values(groepen || {}).map(groep => [groep.naam, scores[groep.naam] || 0]),
+    Object.values(groepen || {}).map(groep => [
+      groep.naam,
+      (scores[groep.naam] || 0) + (groep.adminPoints || 0)
+    ]),
     [groepen, scores]
   );
 

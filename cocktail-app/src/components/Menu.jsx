@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-export default function Menu({ page, setPage }) {
+export default function Menu({ page, setPage, user }) {
   const [open, setOpen] = useState(false);
   const menuItems = ['Uitleg', 'Groepen', 'Leaderboard', 'Stemmen', 'Event', 'Login'];
+  // Voeg Admin toe als de gebruiker admin is
+  const items = user?.admin ? [...menuItems, 'Admin'] : menuItems;
 
   return (
     <nav className="relative w-full">
@@ -30,7 +32,7 @@ export default function Menu({ page, setPage }) {
           absolute sm:relative top-14 left-0 w-full sm:w-auto z-10
         `}
       >
-        {menuItems.map((p, i) => (
+        {items.map((p, i) => (
           <button
             key={p}
             className={`py-2 px-6 sm:py-2 sm:px-4 rounded-full transition-all duration-150 w-full sm:w-auto text-left sm:text-center
