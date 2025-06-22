@@ -47,7 +47,7 @@ export default function Uitleg() {
               👥 Stap 2: Groep aanmaken
             </p>
             <p>
-              Ga naar <span className="text-pink-400 font-semibold">"Groepen"</span>, maak een groep aan met je vrienden en kies een originele groepsnaam
+              Ga naar <span className="text-pink-400 font-semibold">"Groepen"</span>, maak een groep aan met je vrienden (3 leden max) en kies een originele groepsnaam
               <span className="italic"> (deze wordt beoordeeld!)</span>.
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function Uitleg() {
               🎨 Stap 3: Kleur kiezen
             </p>
             <p>
-              Kies als groep een <span className="text-yellow-200 font-semibold">kleur</span> die jullie zal vertegenwoordigen. Kleed je in die kleur voor de avond!
+              Kies als groep een <span className="text-yellow-200 font-semibold">kleur</span> die jullie zal vertegenwoordigen. Kleed je in die kleur voor de avond en verzin een cocktail en hapje in de kleur!
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function Uitleg() {
               🍸 Stap 4: Cocktail & hapje
             </p>
             <p>
-              Voeg later jullie <span className="text-cyan-200 font-semibold">cocktail</span> en <span className="text-purple-200 font-semibold">hapje</span> toe in de app. Alles blijft bewerkbaar tot vlak voor de avond.
+              Voeg ook jullie <span className="text-cyan-200 font-semibold">cocktail</span> en <span className="text-purple-200 font-semibold">hapje</span> toe in de app. Alles blijft bewerkbaar tot vlak voor de avond.
             </p>
           </div>
 
