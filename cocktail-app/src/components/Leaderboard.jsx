@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import getColorHex from '../helpers/getColorHex';
 
 function getTrophyIcon(position) {
@@ -18,11 +18,11 @@ export default function Leaderboard({ guests, user, groepen }) {
       </section>
     );
   }
-  // Maak mapping kleur -> groepsnaam (eerste gevonden per kleur)
-  const kleurNaarGroep = {};
+  // Maak mapping kleur -> groepsnaam (eerste gevonden per kleur) met Map
+  const kleurNaarGroep = new Map();
   Object.values(groepen || {}).forEach((groep) => {
-    if (groep.naam && groep.kleur && !kleurNaarGroep[groep.kleur]) {
-      kleurNaarGroep[groep.kleur] = groep.naam;
+    if (groep.naam && groep.kleur && !kleurNaarGroep.has(groep.kleur)) {
+      kleurNaarGroep.set(groep.kleur, groep.naam);
     }
   });
 
@@ -46,12 +46,16 @@ export default function Leaderboard({ guests, user, groepen }) {
   });
 
   // Voeg ook groepen zonder score toe met 0 punten
-  const allGroupsWithScores = Object.values(groepen || {}).map(groep => {
-    return [groep.naam, scores[groep.naam] || 0];
-  });
+  const allGroupsWithScores = useMemo(() =>
+    Object.values(groepen || {}).map(groep => [groep.naam, scores[groep.naam] || 0]),
+    [groepen, scores]
+  );
 
-  // Sorteer groepen op punten aflopend
-  const sorted = allGroupsWithScores.sort((a, b) => b[1] - a[1]);
+  // Sorteer groepen op punten aflopend, memoized
+  const sorted = useMemo(
+    () => [...allGroupsWithScores].sort((a, b) => b[1] - a[1]),
+    [allGroupsWithScores]
+  );
 
   return (
     <section className="card max-w-3xl mx-auto">
@@ -68,7 +72,7 @@ export default function Leaderboard({ guests, user, groepen }) {
         ) : (
           <ol className="list-decimal list-inside space-y-4 text-lg text-cyan-100">
             {sorted.map(([groepNaam, punten], idx) => {
-              const kleur = Object.values(groepen).find(g => g.naam === groepNaam)?.kleur || null;
+              const kleur = Object.values(groepen ?? {}).find(g => g.naam === groepNaam)?.kleur || null;
 
               return (
                 <li
