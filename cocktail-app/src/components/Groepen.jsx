@@ -168,10 +168,10 @@ function GroepBewerken({ groepId, groep, gasten, groepen, onClose }) {
           <h3 className="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-400 drop-shadow-[0_0_8px_#7C3AED] text-center">
             Groep bewerken
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <input
               type="text"
-              className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+              className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
               placeholder="Groepsnaam"
               value={naam}
               onChange={(e) => setNaam(e.target.value)}
@@ -182,7 +182,21 @@ function GroepBewerken({ groepId, groep, gasten, groepen, onClose }) {
               colors={COLORS}
               usedColors={kleurenInGebruik}
             />
-            <div className="col-span-2">
+            <input
+              type="text"
+              className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+              placeholder="Cocktail (optioneel)"
+              value={cocktail}
+              onChange={(e) => setCocktail(e.target.value)}
+            />
+            <input
+              type="text"
+              className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+              placeholder="Hapje (optioneel)"
+              value={hapje}
+              onChange={(e) => setHapje(e.target.value)}
+            />
+            <div className="col-span-1 sm:col-span-2">
               <label className="block text-cyan-200 mb-1">Kies maximaal 3 leden:</label>
               <div className="flex flex-wrap gap-2">
                 {gasten.length === 0 && (
@@ -221,20 +235,6 @@ function GroepBewerken({ groepId, groep, gasten, groepen, onClose }) {
                 })}
               </div>
             </div>
-            <input
-              type="text"
-              className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
-              placeholder="Cocktail (optioneel)"
-              value={cocktail}
-              onChange={(e) => setCocktail(e.target.value)}
-            />
-            <input
-              type="text"
-              className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
-              placeholder="Hapje (optioneel)"
-              value={hapje}
-              onChange={(e) => setHapje(e.target.value)}
-            />
           </div>
           <div className="flex gap-2 mt-4 justify-center">
             <button
@@ -416,16 +416,30 @@ export default function Groepen({  user }) {
             <div className="text-center text-pink-400 font-semibold mb-2">Groepen bewerken is vergrendeld door de admin.</div>
           )}
           <fieldset className={groepenLocked ? 'opacity-50 pointer-events-none select-none' : ''} disabled={groepenLocked}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <input
                 type="text"
-                className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+                className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
                 placeholder="Groepsnaam"
                 value={naam}
                 onChange={(e) => setNaam(e.target.value)}
               />
               <ColorPicker value={kleur} onChange={setKleur} colors={COLORS} usedColors={kleurenInGebruik} />
-              <div className="col-span-2">
+              <input
+                type="text"
+                className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+                placeholder="Cocktail (optioneel)"
+                value={cocktail}
+                onChange={(e) => setCocktail(e.target.value)}
+              />
+              <input
+                type="text"
+                className="w-full bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
+                placeholder="Hapje (optioneel)"
+                value={hapje}
+                onChange={(e) => setHapje(e.target.value)}
+              />
+              <div className="col-span-1 sm:col-span-2">
                 <label className="block text-cyan-200 mb-1">Kies maximaal 3 leden:</label>
                 <div className="flex flex-wrap gap-2">
                   {gasten.length === 0 && (
@@ -464,20 +478,6 @@ export default function Groepen({  user }) {
                   })}
                 </div>
               </div>
-              <input
-                type="text"
-                className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
-                placeholder="Cocktail (optioneel)"
-                value={cocktail}
-                onChange={(e) => setCocktail(e.target.value)}
-              />
-              <input
-                type="text"
-                className="bg-black/40 border border-purple-400 rounded-lg px-3 py-2 text-cyan-100 placeholder:text-purple-300 focus:border-pink-400 focus:ring-2 focus:ring-pink-300 transition"
-                placeholder="Hapje (optioneel)"
-                value={hapje}
-                onChange={(e) => setHapje(e.target.value)}
-              />
             </div>
             <button
               type="submit"

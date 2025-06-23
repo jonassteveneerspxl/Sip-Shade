@@ -21,9 +21,9 @@ export default function AuthPanel() {
 
   if (user) {
     return (
-      <div className="flex items-center gap-4 p-4 mb-4 max-w-sm mx-auto">
+      <div className="flex flex-col sm:flex-row items-center gap-4 p-4 mb-4 max-w-sm mx-auto">
         <span className="text-cyan-200 font-semibold">Hello, {user.email}</span>
-        <button onClick={logout} className="bg-gradient-to-r from-purple-600 to-pink-400 text-white px-6 py-2 rounded-full font-bold shadow-md hover:scale-105 hover:bg-purple-700 transition-all duration-200">
+        <button onClick={logout} className="bg-gradient-to-r from-purple-600 to-pink-400 text-white px-6 py-2 rounded-full font-bold shadow-md hover:scale-105 hover:bg-purple-700 transition-all duration-200 w-full sm:w-auto">
           Logout
         </button>
       </div>
