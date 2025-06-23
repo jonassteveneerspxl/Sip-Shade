@@ -58,7 +58,7 @@ export default function Uitleg() {
               🎨 Stap 3: Kleur kiezen
             </p>
             <p>
-              Kies als groep een <span className="text-yellow-200 font-semibold">kleur</span> die jullie zal vertegenwoordigen. Kleed je in die kleur voor de avond en verzin een cocktail en hapje in de kleur!
+              Kies als groep een <span className="text-yellow-200 font-semibold">kleur</span> die jullie zal vertegenwoordigen. Kleed je in die kleur voor de avond en verzin een cocktail in de kleur!
             </p>
           </div>
 
